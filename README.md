@@ -27,6 +27,7 @@ REV-512 is a high-performance, cryptographically secure hash function designed f
 - **No GPU required**: Pure CPU implementation
 
 ## 📁 Repository Structure
+```text
 REV-512/
 ├── LICENSE-APACHE # Apache 2.0 license
 ├── LICENSE-MIT # MIT license
@@ -35,8 +36,8 @@ REV-512/
 ├── rev512.cpp # C++ implementation
 ├── rev512_python.py # Python implementation
 └── rev512_demo.cpp # Demo program
+```
 
-text
 
 ## 🔧 Installation
 
