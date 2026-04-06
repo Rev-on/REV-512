@@ -137,17 +137,40 @@ Design Principles
 
 ι step (Round constants): Irrational square roots (transparent, nothing-up-my-sleeve)
 
-🧪 Test Vectors
+## 🧪 Test Vectors
+
+All values are hex-encoded REV-512 outputs.
+
+| Input | REV-512 Hash (hex) |
+|-------|-------------------|
+| `""` (empty string) | `f4e3094be5f56a8182b55560523e667473d1bee9ea3cb43891e3f2d0fb63f294bd92a2a2c503cd381486e913c281b1feeffffdeff431e34eb441aa536812da5b` |
+| `"空串"` | `7732430e3ea269393377b75fa90b100b3922409275b8d290a27f15016dc3d9fe67c4c369f6c013c7141ae82b6d3b20ecc753ae6cc6c3db04e9625326cf9092a5` |
+| `"Hello"` | `6c1bbfc566426443d8a9f9335fa456bedf045a4c5e677d90bcb9018d44267815c2fd1918a60a1a92472df17256e7fcd10558ff3c5b52b3221133e7a0dcffae8f` |
+
+### Verification
+
+You can verify these test vectors using the provided code:
+
 ```cpp
-// Empty string
-rev512::hash_hex("") = "0fbfb5e23f89d1bfffe5678bf3807185e33dccb2e4786a0eff563c1824961395310e44cc632c08cbd60fda69e5f5e990255eec373f0d4d664afd09b1e04eb9cc"
+#include "rev512.h"
+#include <iostream>
+#include <cassert>
 
-// "abc"
-rev512::hash_hex("abc") = "3f89d1bfffe5678bf3807185e33dccb2e4786a0eff563c1824961395310e44cc632c08cbd60fda69e5f5e990255eec373f0d4d664afd09b1e04eb9cc0fbfb5e2"
+int main() {
+    // Test empty string
+    std::string empty_hash = rev512::hash_hex("");
+    std::string expected_empty = "f4e3094be5f56a8182b55560523e667473d1bee9ea3cb43891e3f2d0fb63f294bd92a2a2c503cd381486e913c281b1feeffffdeff431e34eb441aa536812da5b";
+    assert(empty_hash == expected_empty);
+    std::cout << "✓ Empty string test passed" << std::endl;
 
-// "1234567890"
-rev512::hash_hex("1234567890") = "a54ff53a5f1d36f1d413cccf..."
-Full test vectors available in the tests/ directory.
+    // Test "Hello"
+    std::string hello_hash = rev512::hash_hex("Hello");
+    std::string expected_hello = "6c1bbfc566426443d8a9f9335fa456bedf045a4c5e677d90bcb9018d44267815c2fd1918a60a1a92472df17256e7fcd10558ff3c5b52b3221133e7a0dcffae8f";
+    assert(hello_hash == expected_hello);
+    std::cout << "✓ 'Hello' test passed" << std::endl;
+
+    return 0;
+}
 ```
 🎯 Use Cases
 Use Case	Why REV-512
